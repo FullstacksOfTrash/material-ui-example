@@ -1,0 +1,58 @@
+{
+  "name": "senior-enrichment-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:dev": "PORT=3000 DATABASE_URL=postgres://localhost/senior_enrichment_project_test_db nodemon ./node_modules/mocha/bin/mocha",
+    "webpack": "./node_modules/webpack/bin/webpack.js",
+    "webpack:dev": "webpack --watch --mode=development",
+    "start:dev": "npm run webpack:dev & PORT=3000 DATABASE_URL=postgres://localhost/senior_enrichment_project_db nodemon server --ignore src --ignore dist",
+    "postinstall": "npm run webpack",
+    "start": "node server/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "^3.1.2",
+    "@material-ui/icons": "^3.0.1",
+    "@material-ui/lab": "^3.0.0-alpha.18",
+    "axios": "^0.18.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "express": "^4.16.3",
+    "faker": "^4.1.0",
+    "pg": "^7.4.3",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "sequelize": "^4.38.1",
+    "uuid": "^3.3.2",
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.1"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "supertest": "^3.3.0"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
+  }
+}

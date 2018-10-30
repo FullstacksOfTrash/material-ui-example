@@ -1,0 +1,47 @@
+const express = require('express');
+const router = express.Router();
+
+const { School } = require('../db').models;
+
+router.get('/', (req, res, next)=> {
+  School.findAll()
+    .then(schools => res.send(schools))
+    .catch(next);
+});
+
+router.get('/:id', (req, res, next)=> {
+  School.findById(req.params.id)
+    .then(school => res.send(school))
+    .catch(next);
+});
+
+router.delete('/:id', (req, res, next)=> {
+  School.findById(req.params.id)
+    .then(school => school.destroy())
+    .then(()=> res.sendStatus(204))
+    .catch(next);
+});
+
+router.post('/', (req, res, next)=> {
+  School.create(req.body)
+    .then(created => res.status(201).send(created))
+    .catch(next);
+});
+
+router.post('/random', (req, res, next)=> {
+  School.createRandom()
+    .then(created => res.status(201).send(created))
+    .catch(next);
+});
+
+router.put('/:id', (req, res, next)=> {
+  School.findById(req.params.id)
+    .then(school => school.update(req.body))
+    .then(updated => {
+      return School.findById(updated.id)
+    })
+    .then(school => res.send(school))
+    .catch(next);
+});
+
+module.exports = router;
